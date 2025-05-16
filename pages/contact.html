@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header class="bg-white border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white container py-3">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="../images/Screenshot 2025-05-12 231814.png" alt="Logo" width="40" height="40" class="me-2">
+                <span class="fw-bold fs-4">Your Logo</span>
+            </a>
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsible menu -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="#">Causes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="#">Even</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="#">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 text-dark" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex mt-3 mt-lg-0">
+                    <input type="button" value="DONATE NOW" class="btn btn-primary">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 id="title">Contact Us</h2>
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <div class="info-item">
+                <i class="bi bi-telephone-fill" id="icon"></i>
+                <p class="mb-0">+20 100 123 4567</p>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-envelope-fill" id="icon"></i>
+                <p class="mb-0">info@example.com</p>
+            </div>
+            <div class="info-item">
+                <i class="bi bi-geo-alt-fill" id="icon"></i>
+                <p class="mb-0">Cairo, Egypt</p>
+            </div>
+        </div>
+
+        <!-- Google Map -->
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.504904555094!2d31.235711515115175!3d30.04441998187888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fddd2e7f9b5%3A0xa19b0f90b97aa22f!2z2YXYr9mK2YUg2KfZhNin2YXYuSDYp9mE2LnZhdmK2Kk!5e0!3m2!1sar!2seg!4v1715709634174!5m2!1sar!2seg"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="form-container">
+            <form id="contactForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label text-start d-block">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+                        <div class="invalid-feedback">Full name must be at least 2 characters.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label text-start d-block">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label text-start d-block">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="+20 100 123 4567" required>
+                        <div class="invalid-feedback">Phone must be 11 digits and start with 010, 011, 012, or 015.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="subject" class="form-label text-start d-block">Subject</label>
+                        <input type="text" class="form-control" id="subject" placeholder="Message subject" required>
+                        <div class="invalid-feedback">Subject must be at least 2 characters.</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="message" class="form-label text-start d-block">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Write your message here..."
+                            required></textarea>
+                        <div class="invalid-feedback">Message cannot be empty.</div>
+                    </div>
+
+                    <div class="col-12 text-start">
+                        <button type="submit" class="btn btn-primary mt-3">Send Message</button>
+                        <div id="successMessage" class="text-success mt-2" style="display: none;">
+                            Your message has been sent successfully.
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <div>
+        <!-- Top Donate Section -->
+        <div
+            class="donate container d-flex flex-column flex-md-row justify-content-between align-items-center pt-5 py-3 text-center text-md-start">
+            <p class="mb-3 mb-md-0">
+                Help Kids raise $25,000 by making a donation. <br>
+                Lorem Ipsum is simply dummy text of the printing and typesetting.
+            </p>
+            <input type="button" value="DONATE NOW" class="btn btn-primary">
+        </div>
+        <!-- Support Section -->
+        <div
+            class="support  d-flex flex-column flex-md-row align-items-center justify-content-between py-4 text-center text-md-start">
+            <h2 class="support-text mb-3 mb-md-0 me-md-3">Still can’t find your answer?</h2>
+            <input type="button" value="DONATE NOW" class="btn btn-primary">
+        </div>
+    </div>
+
+    <footer class="all-detailes">
+        <!-- Main Footer Content -->
+        <div class="bg-dark text-white pt-5 pb-4">
+            <div class="container">
+                <div class="row text-start">
+                    <!-- Logo + About -->
+                    <div class="col-md-4 mb-4 text-center text-md-start">
+                        <div class="mb-2 d-flex justify-content-center justify-content-md-start align-items-center">
+                            <img src="../images/Screenshot 2025-05-12 231814.png" alt="Logo" width="60" height="60"
+                                class="me-2">
+                            <div>
+                                <h5 class="mb-0 text-info">YOUR LOGO</h5>
+                            </div>
+                        </div>
+                        <p class="text-light small mt-3">
+                            Fundly is dedicated to providing you with the tools you need to raise money for whatever
+                            your cause may be.
+                        </p>
+                    </div>
+
+                    <!-- About Links -->
+                    <div class="col-md-4 mb-4">
+                        <h6 class="text-info mb-3">ABOUT US</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled small">
+                                    <li><a href="#" class="text-light text-decoration-none">Fundraising Ideas</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Pricing</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">About Us</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Support</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled small">
+                                    <li><a href="#" class="text-light text-decoration-none">Blog</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Terms of Use</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">FAQ</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Sales</a></li>
+                                    <li><a href="#" class="text-light text-decoration-none">Press</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="col-md-4 mb-4">
+                        <h6 class="text-info mb-3">FOLLOW US</h6>
+                        <div class="row small">
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-facebook me-2 fs-5"></i> Facebook
+                            </div>
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-twitter me-2 fs-5"></i> Twitter
+                            </div>
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-instagram me-2 fs-5"></i> Instagram
+                            </div>
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-youtube me-2 fs-5"></i> Google+
+                            </div>
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-linkedin me-2 fs-5"></i> Linkedin
+                            </div>
+                            <div class="col-6 d-flex align-items-center mb-2">
+                                <i class="bi bi-whatsapp me-2 fs-5"></i> Blog
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-light">
+                <!-- Bottom Copyright -->
+                <div class="text-center small">
+                    <p class="mb-0">Copyright © Fundly 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../main.js"></script>
+</body>
+
+</html>
