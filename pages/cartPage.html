@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation | Your Charity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&family=Source+Sans+Pro&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <script src="../js/cart.js"> </script>
+
+</head>
+<body>
+
+<div id="header-container"></div>
+
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">Donation</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="donation-info">
+            <img src="../images/img_rectangle_18.png" alt="Children" class="donation-image">
+            <div class="donation-text">
+                You're supporting <span>Donate & Help Kids</span><br>
+                Your donation will benefit <span>Name Lorem ipsum</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <form id="donation-form">
+            <div class="form-section">
+                <h2 class="form-title">Personal Info</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name<span class="required">*</span></label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email Address<span class="required">*</span></label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Home Address<span class="required">*</span></label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 0 0 127px;">
+                        <label class="form-label">City<span class="required">*</span></label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="flex: 0 0 127px;">
+                        <label class="form-label">State<span class="required">*</span></label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+
+            <p>You can make charitable donations to our organization by filling out the form below. We accept debit/credit cards, as well as Paypal.</p>
+
+            <div class="payment-info">
+                <div class="payment-methods">
+                    <div class="payment-method active">
+                        <img src="../images/img_applepay.svg" alt="Apple Pay">
+                    </div>
+                    <div class="payment-method">
+                        <img src="../images/img_image.png" alt="Payment Methods">
+                    </div>
+                    <div class="payment-method">
+                        <img src="../images/img_imagedim180_1.png" alt="PayPal">
+                    </div>
+                </div>
+
+                <div class="card-details">
+                    <div class="card-field">
+                        <label class="card-label">Name on card</label>
+                        <input type="text" class="card-input" value="Olivia Rhye">
+                    </div>
+                    <div class="card-row">
+                        <div class="card-col">
+                            <div class="card-field">
+                                <label class="card-label">Card number</label>
+                                <div class="card-number-container">
+                                    <img src="../images/img_payment_method_icon.svg" alt="Card" class="card-icon">
+                                    <input type="text" class="card-number-input" value="1234 1234 1234 1234">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-col small">
+                            <div class="card-field">
+                                <label class="card-label">Expiry</label>
+                                <input type="text" class="card-input" value="06 / 2024">
+                            </div>
+                        </div>
+                        <div class="card-col small">
+                            <div class="card-field">
+                                <label class="card-label">CVV</label>
+                                <input type="password" class="card-input" value="•••">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-amount">
+                    <div class="amount-input-container">
+                        <div class="amount-symbol">$</div>
+                        <input type="text" class="amount-input" id="custom-amount">
+                    </div>
+                    <div class="amount-options">
+                        <div class="amount-option" data-amount="5">$5</div>
+                        <div class="amount-option active" data-amount="10">$10</div>
+                        <div class="amount-option" data-amount="50">$50</div>
+                        <div class="amount-option" data-amount="100">$100</div>
+                        <div class="amount-option" data-amount="500">$500</div>
+                        <div class="amount-option" data-amount="custom">Custom Amount</div>
+                    </div>
+                    <div class="donation-total">
+                        <div class="total-label">Donation Total:</div>
+                        <div class="total-amount" id="donation-total">$10</div>
+                    </div>
+                    <button type="submit" class="submit-btn">Donate Now</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-conteriner"></div>
+
+</body>
+</html>
