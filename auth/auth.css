@@ -130,6 +130,15 @@ body {
 }
 
 .input-error {
-    border: 2px solid red;
-    outline: none;
+   border: 2px solid red !important;
+  outline: none !important;
+  box-shadow: 0 0 4px red !important
+}
+
+.is-invalid {
+  border: 2px solid red !important;
+}
+
+.is-valid {
+  border: 2px solid green !important;
 }

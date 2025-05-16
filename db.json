@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Jane Doe",
       "role": "campaigner",
       "isActive": true,
@@ -9,17 +9,33 @@
       "password": "password123"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "John Smith",
       "role": "backer",
       "isActive": true,
       "email": "john@example.com",
       "password": "password123"
+    },
+    {
+      "id": "0150",
+      "name": "Ahmed Elads",
+      "email": "ahmedelads789@gmail.com",
+      "password": "123456789",
+      "phone": "01142107502",
+      "role": "campaigner"
+    },
+    {
+      "id": "951c",
+      "name": "Ahmed Khaled",
+      "email": "ahmedelads@gmail.com",
+      "password": "12345الل",
+      "phone": "01142107502",
+      "role": "backer"
     }
   ],
   "campaigns": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Help Build a New School",
       "creatorId": 1,
       "goal": 10000,
@@ -28,12 +44,20 @@
       "isApproved": true,
       "image": "../images/school.png",
       "rewards": [
-        { "id": 1, "title": "Thank You Note", "amount": 10 },
-        { "id": 2, "title": "Special Mention", "amount": 50 }
+        {
+          "id": 1,
+          "title": "Thank You Note",
+          "amount": 10
+        },
+        {
+          "id": 2,
+          "title": "Special Mention",
+          "amount": 50
+        }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Support Wildlife Conservation",
       "creatorId": 1,
       "goal": 5000,
@@ -42,12 +66,20 @@
       "isApproved": true,
       "image": "../images/img_base_6.png",
       "rewards": [
-        { "id": 1, "title": "Digital Poster", "amount": 20 },
-        { "id": 2, "title": "Personalized T-Shirt", "amount": 100 }
+        {
+          "id": 1,
+          "title": "Digital Poster",
+          "amount": 20
+        },
+        {
+          "id": 2,
+          "title": "Personalized T-Shirt",
+          "amount": 100
+        }
       ]
-    },   
-     {
-      "id": 2,
+    },
+    {
+      "id": "2",
       "title": "Support Wildlife Conservation",
       "creatorId": 1,
       "goal": 5000,
@@ -56,15 +88,22 @@
       "isApproved": true,
       "image": "../images/img_base_6.png",
       "rewards": [
-        { "id": 1, "title": "Digital Poster", "amount": 20 },
-        { "id": 2, "title": "Personalized T-Shirt", "amount": 100 }
+        {
+          "id": 1,
+          "title": "Digital Poster",
+          "amount": 20
+        },
+        {
+          "id": 2,
+          "title": "Personalized T-Shirt",
+          "amount": 100
+        }
       ]
     }
-    
   ],
   "pledges": [
     {
-      "id": 1,
+      "id": "1",
       "campaignId": 1,
       "userId": 2,
       "amount": 50,

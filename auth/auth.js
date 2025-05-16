@@ -34,13 +34,14 @@ class AuthFormHandler {
         return data.length > 0 ? data[0] : null;
     }
 
-    clearError(input) {
-        input.classList.remove("input-error");
+    addError(input) {
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid");
     }
 
-    showError(input) {
-        input.classList.add("input-error");
-        input.focus();
+    addSuccess(input) {
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
     }
 
     initLoginForm() {
@@ -49,43 +50,44 @@ class AuthFormHandler {
 
         if (!loginForm) return;
 
-        const emailInput = loginForm.querySelector("#email");
-        const passwordInput = loginForm.querySelector("#password");
-
-        [emailInput, passwordInput].forEach(input => {
-            input.addEventListener("input", () => this.clearError(input));
-        });
-
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            const emailInput = loginForm.querySelector("#email");
+            const passwordInput = loginForm.querySelector("#password");
+
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
-            let isValid = true;
+
+            let valid = true;
 
             if (!this.validateEmail(email)) {
-                this.showError(emailInput);
-                isValid = false;
+                this.addError(emailInput);
+                valid = false;
+            } else {
+                this.addSuccess(emailInput);
             }
 
             if (password.length < 6) {
-                this.showError(passwordInput);
-                isValid = false;
+                this.addError(passwordInput);
+                valid = false;
+            } else {
+                this.addSuccess(passwordInput);
             }
 
-            if (!isValid) return;
+            if (!valid) return;
 
             const user = await this.validateLogin(email, password);
 
             if (user) {
                 loginSuccess.style.display = "block";
                 setTimeout(() => {
-                    window.location.href = "index.html";
+                    window.location.href = "../index.html";
                 }, 1500);
             } else {
                 alert("Incorrect email or password.");
-                this.showError(emailInput);
-                this.showError(passwordInput);
+                this.addError(emailInput);
+                this.addError(passwordInput);
             }
         });
     }
@@ -96,60 +98,62 @@ class AuthFormHandler {
 
         if (!registerForm) return;
 
-        const nameInput = registerForm.name;
-        const emailInput = registerForm.email;
-        const passwordInput = registerForm.password;
-        const phoneInput = registerForm.phone;
-
-        // إزالة الخط الأحمر عند التعديل
-        [nameInput, emailInput, passwordInput, phoneInput].forEach(input => {
-            input.addEventListener("input", () => this.clearError(input));
-        });
-
         registerForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            const nameInput = registerForm.name;
+            const emailInput = registerForm.email;
+            const passwordInput = registerForm.password;
+            const phoneInput = registerForm.phone;
             const roleInput = registerForm.querySelector('input[name="role"]:checked');
+
             const name = nameInput.value.trim();
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
             const phone = phoneInput.value.trim();
             const role = roleInput?.value;
 
-            let isValid = true;
+            let valid = true;
 
             if (name.length < 2) {
-                this.showError(nameInput);
-                isValid = false;
+                this.addError(nameInput);
+                valid = false;
+            } else {
+                this.addSuccess(nameInput);
             }
 
             if (!this.validateEmail(email)) {
-                this.showError(emailInput);
-                isValid = false;
+                this.addError(emailInput);
+                valid = false;
+            } else {
+                this.addSuccess(emailInput);
             }
 
             if (password.length < 6) {
-                this.showError(passwordInput);
-                isValid = false;
+                this.addError(passwordInput);
+                valid = false;
+            } else {
+                this.addSuccess(passwordInput);
             }
 
             if (!this.validatePhone(phone)) {
-                this.showError(phoneInput);
-                isValid = false;
+                this.addError(phoneInput);
+                valid = false;
+            } else {
+                this.addSuccess(phoneInput);
             }
 
             if (!role) {
-                const roleField = registerForm.querySelector('input[name="role"]');
-                this.showError(roleField);
-                isValid = false;
+                alert("Please select a role.");
+                valid = false;
             }
 
-            if (!isValid) return;
+            if (!valid) return;
 
             const exists = await this.userExists(email);
             if (exists) {
                 alert("Email already registered.");
-                this.showError(emailInput);
+                this.addError(emailInput);
                 return;
             }
 
@@ -159,9 +163,9 @@ class AuthFormHandler {
                 setTimeout(() => successMessage.style.display = "none", 3000);
                 registerForm.reset();
 
-                [nameInput, emailInput, passwordInput, phoneInput].forEach(input => this.clearError(input));
-            } else {
-                alert("Registration failed. Please try again.");
+                [nameInput, emailInput, passwordInput, phoneInput].forEach(input => {
+                    input.classList.remove("is-valid", "is-invalid");
+                });
             }
         });
     }
