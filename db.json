@@ -45,22 +45,21 @@
         { "id": 1, "title": "Digital Poster", "amount": 20 },
         { "id": 2, "title": "Personalized T-Shirt", "amount": 100 }
       ]
-    },   
-     {
-      "id": 2,
-      "title": "Support Wildlife Conservation",
+    },
+    {
+      "id": 3,
+      "title": "Food Donation Campaign",
       "creatorId": 1,
-      "goal": 5000,
-      "raised": 1500,
-      "deadline": "2025-11-30",
+      "goal": 3000,
+      "raised": 1200,
+      "deadline": "2025-10-20",
       "isApproved": true,
-      "image": "../images/img_base_6.png",
+      "image": "../images/food_donation.png",
       "rewards": [
-        { "id": 1, "title": "Digital Poster", "amount": 20 },
-        { "id": 2, "title": "Personalized T-Shirt", "amount": 100 }
+        { "id": 1, "title": "Certificate of Appreciation", "amount": 15 },
+        { "id": 2, "title": "Special Mention in Campaign", "amount": 60 }
       ]
     }
-    
   ],
   "pledges": [
     {
