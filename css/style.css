@@ -65,7 +65,9 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: var(--text-color);
 }
-
+a{
+  text-decoration: none;
+}
 /* Header Styles */
 .top-bar {
   background-color: var(--dark-bg);
@@ -142,7 +144,6 @@ body {
 }
 .donate-btn {
   background-color: var(--highlight-bg); /* SCSS $highlight-bg */
-  color: var(--white);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem; /* 4px */
   padding: 0.5625rem 1rem; /* 9px 16px */
@@ -151,7 +152,10 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
+.donate-btn a{
+  color: var(--white);
 
+}
 /* Hero Section */
 .hero {
   position: relative;

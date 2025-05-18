@@ -1,5 +1,4 @@
 
-document.addEventListener("DOMContentLoaded", () => {
   const campaignList = document.querySelector(".projects-container");
   const prevBtn = document.querySelector('.carousel-btn.prev');
   const nextBtn = document.querySelector('.carousel-btn.next');
@@ -41,7 +40,7 @@ localContent("footer-conteriner","../components/footer.html");
                     <span class="amount-label">Target</span>
                   </div>
                 </div>
-                <button class="donate-more-btn" onclick="viewCampaign(${campaign.id})">Read More & Donate</button>
+                <button class="donate-more-btn" onclick="viewCampaign(${campaign.id})">Read More</button>
               </div>
             `;
 
@@ -56,9 +55,7 @@ localContent("footer-conteriner","../components/footer.html");
   }
 
   function viewCampaign(id) {
-    window.location.href = `campaign.html?id=${id}`;
-  }
-  
+  window.location.href = `../pages/viewcapmain.html?id=${id}`;
+}
 
-  InitializeCampaign();
-});
+InitializeCampaign();
