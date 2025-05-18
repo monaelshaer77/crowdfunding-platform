@@ -29,6 +29,7 @@ localContent("footer-conteriner","../components/footer.html");
         const campaign = {
             title: document.getElementById('description').value,
             deadline: document.getElementById('deadline').value,
+            raised:0,
             goal: parseFloat(document.getElementById('target').value),
             rewardTitle: document.getElementById('rewardTitle').value,
             rewardDescription: document.getElementById('rewardDescription').value,

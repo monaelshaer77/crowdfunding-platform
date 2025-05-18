@@ -40,7 +40,7 @@ localContent("footer-conteriner","../components/footer.html");
                     <span class="amount-label">Target</span>
                   </div>
                 </div>
-                <button class="donate-more-btn" onclick="viewCampaign(${campaign.id})">Read More</button>
+                <button class="donate-more-btn" onclick="viewCampaign('${campaign.id}')">Read More</button>
               </div>
             `;
 

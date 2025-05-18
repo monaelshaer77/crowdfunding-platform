@@ -7,9 +7,9 @@
 body {
     /* background: linear-gradient(to right, #00c6ff, #0072ff); */
     min-height: 100vh;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .login-container {
@@ -21,6 +21,10 @@ body {
     width: 850px;
     max-width: 100%;
     direction: rtl;
+    padding: 50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .form-right-login {
@@ -51,6 +55,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s;
+    margin: 10px 0;
 }
 
 .submit-btn:hover {
@@ -85,6 +90,10 @@ body {
     max-width: 850px;
     width: 100%;
     overflow: hidden;
+    padding: 50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .form-left-sign {
@@ -116,6 +125,7 @@ body {
     border-radius: 30px;
     font-weight: bold;
     cursor: pointer;
+    margin: 10px 0;
 }
 
 .submit-btn:hover {
