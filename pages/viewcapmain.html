@@ -36,7 +36,7 @@
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#kidsCarousel"
-                        data-bs-slide="next">
+                        data-bs-slide="next" onclick="">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-md-3 ps-5 d-flex flex-column align-items-start justify-content-start py-4">
-                <button class="btn btn-success btn-lg mb-3 w-100">DONATE NOW</button>
+                <button class="btn btn-success btn-lg mb-3 w-100 " onclick="viewCampaign('${campaign.id}')">DONATE NOW</button>
                 <div class="d-flex gap-3 mb-4">
                     <i class="bi bi-facebook text-primary fs-4"></i>
                     <i class="bi bi-twitter text-info fs-4"></i>
@@ -399,24 +399,7 @@
     </div>
 
 
-    <div>
-        <!-- Top Donate Section -->
-        <div
-            class="donate container d-flex flex-column flex-md-row justify-content-between align-items-center pt-5 py-3 text-center text-md-start">
-            <p class="mb-3 mb-md-0">
-                Help Kids raise $25,000 by making a donation. <br>
-                Lorem Ipsum is simply dummy text of the printing and typesetting.
-            </p>
-            <input type="button" value="DONATE NOW" class="btn btn-primary">
-        </div>
-
-        <!-- Support Section -->
-        <div
-            class="support  d-flex flex-column flex-md-row align-items-center justify-content-between py-4 text-center text-md-start">
-            <h2 class="support-text mb-3 mb-md-0 me-md-3">Still can’t find your answer?</h2>
-            <input type="button" value="DONATE NOW" class="btn btn-primary">
-        </div>
-    </div>
+ 
 
     
 <div id="footer-container"></div>
