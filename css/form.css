@@ -2,6 +2,9 @@ body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7fc;
         }
+        .container{
+            margin-bottom: 20px;
+        }
         .campaign-form {
             background: #ffffff;
             border-radius: 15px;
