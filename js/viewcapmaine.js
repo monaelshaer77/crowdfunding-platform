@@ -210,7 +210,7 @@ function viewCampaign(id){
 document.addEventListener('DOMContentLoaded', () => {
   new FAQApp();
   new ContactForm('contactForm', 'successMessage');
-});
+})
 
 // FAQApp 
 class FAQApp {
