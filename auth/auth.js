@@ -1,5 +1,4 @@
 
-
 function localContent(elementId,fileName)
 {
     fetch(fileName)
