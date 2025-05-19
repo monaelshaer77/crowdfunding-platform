@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch("http://localhost:3000/users")
         .then(response => response.json())
         .then(users => {
-          this.userListEl.innerHTML = "<h3 class='text-xl font-semibold mb-2'>Users</h3>";
+          // this.userListEl.innerHTML = "<h3 class='text-xl font-semibold mb-2'>Users</h3>";
           users.forEach(user => this.renderUser(user));
         })
         .catch(err => console.log("Error fetching users:", err));
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch("http://localhost:3000/campaigns")
         .then(response => response.json())
         .then(campaigns => {
-          this.campaignListEl.innerHTML = "<h3>Pending Campaigns</h3>";
+          // this.campaignListEl.innerHTML = "<h3>Pending Campaigns</h3>";
           campaigns.forEach(campaign => this.renderCampaign(campaign));
         })
         .catch(err => console.log("Error fetching campaigns:", err));
