@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // دالة مساعدة لتحديث المستخدم
   async function updateUser(id, updates, successMessage, errorMessage) {
     try {
       const response = await fetch(`http://localhost:3000/users/${id}`, {
@@ -187,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // دالة مساعدة لتحديث الحملة
   async function updateCampaign(id, updates, successMessage, errorMessage) {
     try {
       const response = await fetch(`http://localhost:3000/campaigns/${id}`, {
@@ -244,7 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // تهيئة الكائنات
   const userManager = new UserManager();
   const campaignManager = new CampaignManager();
   const pledgeManager = new PledgeManager();
