@@ -42,6 +42,7 @@ function InitializeCampaign() {
                   <span class="amount-label">Target</span>
                 </div>
               </div>
+              <p class="category">${campaign.category}</p>
               <button class="donate-more-btn" onclick="viewCampaign('${campaign.id}')">Read More</button>
             </div>
           `;
