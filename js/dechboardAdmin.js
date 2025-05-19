@@ -187,23 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // دالة مساعدة لتحديث الحملة
-  async function updateCampaign(id, updates, successMessage, errorMessage) {
-    try {
-      const response = await fetch(`http://localhost:3000/campaigns/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates)
-      });
-      if (!response.ok) throw new Error(errorMessage);
-      return true;
-    } catch (err) {
-      console.error(`${errorMessage}:`, err);
-      alert(`${errorMessage}: ${err.message}`);
-      return false;
-    }
-  }
-
   class PledgeManager {
     constructor() {
       this.pledgeListEl = document.getElementById("pledge-list");
