@@ -251,14 +251,11 @@ a{
   object-fit: cover;
 }
 
-/* .project-category {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5.3125rem; 
-  height: 5.3125rem; 
-  background-color: var(--accent-color);
-} */
+.category {
+ font-weight: var(--font-weight-bold);
+ font-size: var(--font-size-medium);
+  color: var(--dark-bg);
+} 
 
 .project-content {
   padding: var(--spacing-md);

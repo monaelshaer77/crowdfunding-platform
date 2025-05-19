@@ -5,11 +5,7 @@
 }
 
 body {
-    /* background: linear-gradient(to right, #00c6ff, #0072ff); */
     min-height: 100vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .login-container {

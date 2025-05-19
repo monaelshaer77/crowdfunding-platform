@@ -20,6 +20,19 @@ body {
             color: #2c3e50;
             font-weight: 700;
         }
+         .form-select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+          }
+          
+          .form-select:focus {
+            border-color: #1976d2;
+            outline: none;
+          }
+
         .form-control, .form-select {
             border-radius: 10px;
             border: 1px solid #ced4da;
