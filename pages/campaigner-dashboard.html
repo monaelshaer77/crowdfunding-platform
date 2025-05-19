@@ -42,6 +42,20 @@
                         <input type="file" class="form-control" id="image" accept="image/*" required>
                         <img id="imagePreview" class="image-preview" alt="Image Preview">
                     </div>
+                <div class="mb-3">
+                <label for="category" class="form-label">Campaign Category</label>
+                <select class="form-select" id="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Health & Medical">Health & Medical</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Education">Education</option>
+                    <option value="Disability">Disability</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Art & Culture">Art & Culture</option>
+                    <option value="Local Community">Local Community</option>
+                    <option value="International Aid">International Aid</option>
+                </select>
+            </div>
                     <div class="mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
                         <input type="date" class="form-control" id="deadline" required>

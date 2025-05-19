@@ -189,7 +189,7 @@ a{
   margin-bottom: var(--spacing-lg);
 }
 
-.hero-btn {
+.Creat-Campaign {
   background-color: var(--highlight-bg); /* SCSS $highlight-bg */
   color: var(--white);
   border: none;

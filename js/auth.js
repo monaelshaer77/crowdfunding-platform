@@ -1,16 +1,14 @@
-
-function localContent(elementId,fileName)
-{
+function localContent(elementId, fileName) {
     fetch(fileName)
-    .then(response=>response.text())
-    .then(data=>{
-        document.getElementById(elementId).innerHTML=data;
-    })
-    .catch(err=>console.log('Error loading content'));
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(err => console.log('Error loading content'));
 }
-localContent("header-container",'../components/header.html');
-localContent("footer-conteriner","../components/footer.html");
 
+localContent("header-container", '../components/header.html');
+localContent("footer-container", "../components/footer.html");
 
 class AuthFormHandler {
     constructor() {
@@ -96,7 +94,13 @@ class AuthFormHandler {
             if (user) {
                 loginSuccess.style.display = "block";
                 setTimeout(() => {
-                    window.location.href = "../index.html";
+                    if (user.role === "admin") {
+                        window.location.href = "../pages/dechboardAdmin.html";
+                    } else if (user.role === "campaigner" && user.isApproved) {
+                        window.location.href = "../pages/campaigner-dashboard.html";
+                    }  else if (user.role === "backer" )  {
+                        window.location.href = "../pages/Backer.html";
+                    }
                 }, 1500);
             } else {
                 alert("Incorrect email or password.");
@@ -171,7 +175,7 @@ class AuthFormHandler {
                 return;
             }
 
-            const success = await this.registerUser({ name, email, password, phone, role });
+            const success = await this.registerUser({ name, email, password, phone, role, approved: role === "admin" });
             if (success) {
                 successMessage.style.display = 'block';
                 setTimeout(() => successMessage.style.display = "none", 3000);
