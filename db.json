@@ -1,17 +1,23 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Jane Doe",
+      "id": "ab1b",
+      "name": "monaelshaer99",
+      "email": "monaelshaer66@gmail.com",
+      "password": "1234567",
+      "phone": "01119368845",
       "role": "campaigner",
-      "isActive": true,
-      "email": "jane@example.com",
-      "password": "password123"
+      "isApproved": true,
+      "isActive": false
     },
     {
-      "id": "2",
-      "name": "John Smith",
+      "id": "549f",
+      "name": "Mona Ayman Elshaer",
+      "email": "monaelshaer6@gmail.com",
+      "password": "0987654",
+      "phone": "01119368845",
       "role": "backer",
+<<<<<<< HEAD
       "isActive": true,
       "email": "john@example.com",
       "password": "password123"
@@ -111,8 +117,13 @@
       ],
       "raised": 0,
       "isApproved": false
+=======
+      "isApproved": true,
+      "isActive": false
+>>>>>>> fe9705c394a4c9fc31bd9581cd7eb8711a75dc5b
     }
   ],
+  "campaigns": [],
   "pledges": [
     {
       "id": "1",
