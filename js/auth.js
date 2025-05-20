@@ -95,11 +95,11 @@ class AuthFormHandler {
                 loginSuccess.style.display = "block";
                 setTimeout(() => {
                     if (user.role === "admin") {
-                        window.location.href = "../pages/dechboardAdmin.html";
+                        window.open("../pages/dechboardAdmin.html", "_blank");
                     } else if (user.role === "campaigner" && user.isApproved) {
-                        window.location.href = "../pages/campaigner-dashboard.html";
+                         window.open("../pages/campaigner-dashboard.html", "_blank");
                     }  else if (user.role === "backer" )  {
-                        window.location.href = "../pages/Backer.html";
+                        window.open("../pages/Backer.html", "_blank");
                     }
                 }, 1500);
             } else {
