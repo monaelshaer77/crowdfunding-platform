@@ -21,13 +21,14 @@ function localContent(elementId,fileName)
     .catch(err=>console.log('Error loading content'));
 }
 localContent("header-container",'../components/header.html');
-localContent("footer-conteriner","../components/footer.html");
+localContent("footer-container","../components/footer.html");
 
     document.getElementById('campaignForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
         const campaign = {
             title: document.getElementById('description').value,
+            category :document.getElementById('category').value,
             deadline: document.getElementById('deadline').value,
             raised:0,
             goal: parseFloat(document.getElementById('target').value),

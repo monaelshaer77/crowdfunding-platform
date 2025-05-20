@@ -5,11 +5,7 @@
 }
 
 body {
-    /* background: linear-gradient(to right, #00c6ff, #0072ff); */
     min-height: 100vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .login-container {
@@ -140,15 +136,15 @@ body {
 }
 
 .input-error {
-   border: 2px solid red !important;
-  outline: none !important;
-  box-shadow: 0 0 4px red !important
+    border: 2px solid red !important;
+    outline: none !important;
+    box-shadow: 0 0 4px red !important
 }
 
 .is-invalid {
-  border: 2px solid red !important;
+    border: 2px solid red !important;
 }
 
 .is-valid {
-  border: 2px solid green !important;
+    border: 2px solid green !important;
 }

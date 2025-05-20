@@ -9,7 +9,7 @@ function localContent(elementId,fileName)
     .catch(err=>console.log('Error loading content'));
 }
 localContent("header-container",'../components/header.html');
-localContent("footer-conteriner","../components/footer.html");
+localContent("footer-container","../components/footer.html");
 
 
 class AuthFormHandler {

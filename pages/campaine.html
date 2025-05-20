@@ -77,11 +77,10 @@
   </section>
 
   <!-- Footer -->
-  <div id="footer-conteriner"></div>
+  <div id="footer-container"></div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // تحميل header و footer
       fetch("../components/header.html")
         .then(res => res.text())
         .then(html => document.getElementById("header-container").innerHTML = html);
@@ -104,7 +103,6 @@
           document.querySelector("h4.fw-bold.me-2").textContent = data.title;
           document.querySelector(".mt-5 p").textContent = data.description || "No description available.";
 
-          // صور الحملة
           const carousel = document.querySelector(".carousel-inner");
           carousel.innerHTML = "";
 
@@ -115,7 +113,6 @@
             carousel.appendChild(div);
           });
 
-          // التفاصيل الجانبية
           document.querySelector(".col-md-3 h4").textContent = data.donors || 0;
           document.querySelector(".col-md-3 h3").textContent = `$${(data.raised || 0).toLocaleString()}`;
           const percentage = (data.raised / data.goal) * 100 || 0;
