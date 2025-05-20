@@ -3,82 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Backer - Crowdfunding Platform</title>
+  <title>Crowdfunding Platform - Backer</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     .hidden { display: none; }
-    .campaign-card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
-    .campaign-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
+    .campaign-card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+    .project-image { width: 100%; height: 12rem; object-fit: cover; }
   </style>
 </head>
 <body>
   <div class="container mt-4">
-    <h1 class="mb-4">Crowdfunding Platform - Backer</h1>
+    <h1>Crowdfunding Platform - Backer</h1>
 
-    <!-- Tabs التنقل -->
     <ul class="nav nav-tabs mb-4">
       <li class="nav-item">
-        <a href="#" class="nav-link active" data-section="campaigns">Browse Campaigns</a>
+        <a class="nav-link active" href="#" data-section="campaigns">Browse Campaigns</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" data-section="pledges">Pledge History</a>
+        <a class="nav-link" href="#" data-section="pledges">Pledge History</a>
       </li>
     </ul>
 
-    <!-- قسم عرض الحملات -->
     <div id="campaigns" class="section">
+      <h2>Browse Campaigns</h2>
       <div class="mb-3">
-        <label for="categoryFilter" class="form-label">Filter by Category:</label>
-        <select id="categoryFilter" class="form-select" style="max-width: 300px;">
+        <label for="categoryFilter" class="form-label">Filter by Category</label>
+        <select id="categoryFilter" class="form-select">
           <option value="">All</option>
+          <option value="Health & Medical">Health & Medical</option>
+          <option value="Technology">Technology</option>
           <option value="Education">Education</option>
-          <option value="Health">Health</option>
-          <option value="Tech">Tech</option>
-          <option value="Arts">Arts</option>
+          <option value="Disability">Disability</option>
+          <option value="Sports">Sports</option>
+          <option value="Art & Culture">Art & Culture</option>
+          <option value="Local Community">Local Community</option>
+          <option value="International Aid">International Aid</option>
         </select>
       </div>
-
-      <div class="row" id="campaignList">
-        <!-- تظهر هنا بطاقات الحملات -->
-      </div>
+      <div id="campaignList" class="row"></div>
     </div>
 
-    <!-- قسم عرض تاريخ التبرعات -->
-    <div id="pledges" class="section hidden">
-      <h3>Your Pledge History</h3>
-      <div id="pledgeList" class="mt-3">
-        <!-- تظهر هنا تاريخ التبرعات -->
-      </div>
-    </div>
-
-    <!-- Modal التبرع -->
     <div class="modal fade" id="pledgeModal" tabindex="-1" aria-labelledby="pledgeModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <form id="pledgeForm" class="modal-content">
+        <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="pledgeModalLabel">Make a Pledge</h5>
+            <h5 class="modal-title" id="pledgeModalLabel">Pledge to Campaign</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <input type="hidden" id="pledgeCampaignId" name="campaignId" />
-            <input type="hidden" id="pledgeUserId" name="userId" />
-            <div class="mb-3">
-              <label for="pledgeAmount" class="form-label">Amount ($):</label>
-              <input type="number" id="pledgeAmount" name="amount" class="form-control" min="1" required />
-            </div>
-
-            <div class="mb-3">
-              <label for="pledgeReward" class="form-label">Select a Reward (optional):</label>
-              <select id="pledgeReward" name="rewardId" class="form-select">
-                <option value="">No reward</option>
-              </select>
-            </div>
+            <form id="pledgeForm">
+              <input type="hidden" id="pledgeCampaignId" />
+              <input type="hidden" id="pledgeUserId" />
+              <div class="mb-3">
+                <label for="pledgeAmount" class="form-label">Amount ($)</label>
+                <input type="number" class="form-control" id="pledgeAmount" required min="0" />
+              </div>
+              <div class="mb-3">
+                <label for="pledgeReward" class="form-label">Select Reward</label>
+                <select id="pledgeReward" class="form-select" required>
+                  <option value="">Select a reward</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" id="pledgeSubmitBtn">Pledge</button>
+            </form>
           </div>
-          <div class="modal-footer">
-            <button type="submit" id="pledgeSubmitBtn" class="btn btn-primary">Submit Pledge</button>
-          </div>
-        </form>
+        </div>
       </div>
+    </div>
+
+    <div id="pledges" class="section hidden">
+      <h2>Pledge History</h2>
+      <div id="pledgeList"></div>
     </div>
   </div>
 
@@ -86,20 +81,29 @@
   <script>
     const API_URL = 'http://localhost:3000';
 
-    const currentUserId = 'USER_ID_HERE'; 
+    // لنفترض أن الbacker معرف مسبقًا، عيّنه هنا مباشرة
+    const currentUserId = 'backer123'; // غيره حسب ID الbacker الحقيقي
+    document.getElementById('pledgeUserId').value = currentUserId;
 
-    const campaignList = document.getElementById('campaignList');
-    const pledgeList = document.getElementById('pledgeList');
-    const categoryFilter = document.getElementById('categoryFilter');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadCampaigns();
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        sections.forEach(section => section.classList.add('hidden'));
+        document.getElementById(link.dataset.section).classList.remove('hidden');
+
+        if (link.dataset.section === 'campaigns') loadCampaigns();
+        else if (link.dataset.section === 'pledges') loadPledgeHistory();
+      });
     });
 
     async function loadCampaigns() {
-      const category = categoryFilter.value;
+      const campaignList = document.getElementById('campaignList');
+      const category = document.getElementById('categoryFilter').value;
 
       try {
         campaignList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
@@ -116,7 +120,7 @@
           card.className = 'col-lg-4 col-md-6 mb-4';
           card.innerHTML = `
             <div class="campaign-card">
-              <img src="${c.image}" alt="${c.title}" />
+              <img src="${c.image}" alt="${c.title}" class="project-image" />
               <h4>${c.title}</h4>
               <p>${c.description}</p>
               <p><strong>Category:</strong> ${c.category}</p>
@@ -132,18 +136,15 @@
           btn.addEventListener('click', async () => {
             const campaignId = btn.dataset.id;
             document.getElementById('pledgeCampaignId').value = campaignId;
-            document.getElementById('pledgeUserId').value = currentUserId;
 
             const res = await fetch(`${API_URL}/campaigns/${campaignId}`);
             const campaign = await res.json();
-
             const rewardSelect = document.getElementById('pledgeReward');
-            rewardSelect.innerHTML = '<option value="">No reward</option>';
-
-            campaign.rewards.forEach((reward, index) => {
+            rewardSelect.innerHTML = '<option value="">Select a reward</option>';
+            campaign.rewards.forEach((r, index) => {
               const option = document.createElement('option');
-              option.value = index; 
-              option.text = reward.title;
+              option.value = index;  
+              option.text = r.title;
               rewardSelect.appendChild(option);
             });
           });
@@ -153,35 +154,29 @@
       }
     }
 
-    categoryFilter.addEventListener('change', () => {
-      loadCampaigns();
-    });
+    document.getElementById('categoryFilter').addEventListener('change', loadCampaigns);
 
     document.getElementById('pledgeForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
       const submitBtn = document.getElementById('pledgeSubmitBtn');
       submitBtn.disabled = true;
 
       const amount = parseFloat(document.getElementById('pledgeAmount').value);
       const rewardIndex = document.getElementById('pledgeReward').value;
       const campaignId = document.getElementById('pledgeCampaignId').value;
-      const userId = document.getElementById('pledgeUserId').value;
 
       try {
         const campaignRes = await fetch(`${API_URL}/campaigns/${campaignId}`);
+        if (!campaignRes.ok) throw new Error('Failed to fetch campaign data');
         const campaign = await campaignRes.json();
 
-        let rewardId = null;
-        if (rewardIndex !== "") {
-          const reward = campaign.rewards[rewardIndex];
-          rewardId = reward ? (reward.id || null) : null;
-        }
+        // نستخدم رقم index كـ rewardId
+        const rewardId = rewardIndex !== "" ? rewardIndex : null;
 
         const pledge = {
           id: Date.now().toString(),
           campaignId,
-          userId,
+          userId: currentUserId,
           amount,
           rewardId,
           createdAt: new Date().toISOString()
@@ -193,29 +188,35 @@
           body: JSON.stringify(pledge)
         });
 
-        // if (!pledgeResponse.ok) throw new Error('Failed to submit pledge');
+        if (!pledgeResponse.ok) throw new Error('Failed to submit pledge');
 
+        // تحديث قيمة raised في الحملة
         const updatedRaised = (campaign.raised || 0) + amount;
-        await fetch(`${API_URL}/campaigns/${campaignId}`, {
+        const updateResponse = await fetch(`${API_URL}/campaigns/${campaignId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ raised: updatedRaised })
         });
 
-        alert('Pledge submitted!');
+        if (!updateResponse.ok) throw new Error('Failed to update campaign raised');
+
+        alert('Pledge submitted successfully!');
         e.target.reset();
         bootstrap.Modal.getInstance(document.getElementById('pledgeModal')).hide();
 
         loadCampaigns();
+
       } catch (error) {
-        console.error(error);
-        // alert('Error submitting pledge');
+        console.error('Error submitting pledge:', error);
+        alert('Error submitting pledge: ' + error.message);
       } finally {
         submitBtn.disabled = false;
       }
     });
 
     async function loadPledgeHistory() {
+      const pledgeList = document.getElementById('pledgeList');
+
       try {
         pledgeList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
         const res = await fetch(`${API_URL}/pledges?userId=${currentUserId}`);
@@ -224,44 +225,25 @@
 
         pledgeList.innerHTML = pledges.length ? '' : '<div class="text-muted text-center">No pledges found.</div>';
 
-        const campaignsRes = await fetch(`${API_URL}/campaigns`);
-        const campaigns = await campaignsRes.json();
-        const campaignMap = campaigns.reduce((map, c) => { map[c.id] = c.title; return map; }, {});
-
         pledges.forEach(p => {
-          const item = document.createElement('div');
-          item.className = 'card mb-2';
-          item.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">Campaign: ${campaignMap[p.campaignId] || 'Unknown'}</h5>
-              <p class="card-text">Amount: $${p.amount}</p>
-              <p class="card-text">Reward ID: ${p.rewardId || 'None'}</p>
-              <p class="card-text">Date: ${new Date(p.createdAt).toLocaleDateString()}</p>
-            </div>`;
-          pledgeList.appendChild(item);
+          const div = document.createElement('div');
+          div.className = 'mb-3 p-3 border rounded';
+          div.innerHTML = `
+            <p><strong>Campaign ID:</strong> ${p.campaignId}</p>
+            <p><strong>Amount:</strong> $${p.amount}</p>
+            <p><strong>Reward Index:</strong> ${p.rewardId !== null ? p.rewardId : 'No reward'}</p>
+            <p><small>At: ${new Date(p.createdAt).toLocaleString()}</small></p>
+          `;
+          pledgeList.appendChild(div);
         });
       } catch (error) {
-        pledgeList.innerHTML = '<div class="text-danger text-center">Failed to load pledges</div>';
+        pledgeList.innerHTML = '<div class="text-danger text-center">Failed to load pledge history</div>';
       }
     }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        showSection(link.dataset.section);
-
-        if (link.dataset.section === 'campaigns') loadCampaigns();
-        else if (link.dataset.section === 'pledges') loadPledgeHistory();
-      });
+    window.addEventListener('DOMContentLoaded', () => {
+      loadCampaigns();
     });
-
-    function showSection(sectionId) {
-      sections.forEach(sec => {
-        sec.classList.toggle('hidden', sec.id !== sectionId);
-      });
-    }
   </script>
 </body>
 </html>
