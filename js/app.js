@@ -59,5 +59,4 @@ function viewCampaign(id) {
   window.location.href = `../pages/viewcapmain.html?id=${id}`;
 }
 
-// استدعاء الدالة عند تحميل الصفحة
 InitializeCampaign();

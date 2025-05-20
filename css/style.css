@@ -511,7 +511,9 @@ a{
   position: relative;
   max-width: 19.9375rem; /* 319px */
 }
-
+.help-video video:hover {
+        cursor: pointer;
+    }
 .video-thumbnail {
   width: 100%;
   height: var(--video-height);
