@@ -81,8 +81,7 @@
   <script>
     const API_URL = 'http://localhost:3000';
 
-    // لنفترض أن الbacker معرف مسبقًا، عيّنه هنا مباشرة
-    const currentUserId = 'backer123'; // غيره حسب ID الbacker الحقيقي
+    const currentUserId = 'backer123'; 
     document.getElementById('pledgeUserId').value = currentUserId;
 
     const navLinks = document.querySelectorAll('.nav-link');
@@ -170,7 +169,6 @@
         if (!campaignRes.ok) throw new Error('Failed to fetch campaign data');
         const campaign = await campaignRes.json();
 
-        // نستخدم رقم index كـ rewardId
         const rewardId = rewardIndex !== "" ? rewardIndex : null;
 
         const pledge = {
@@ -190,7 +188,6 @@
 
         if (!pledgeResponse.ok) throw new Error('Failed to submit pledge');
 
-        // تحديث قيمة raised في الحملة
         const updatedRaised = (campaign.raised || 0) + amount;
         const updateResponse = await fetch(`${API_URL}/campaigns/${campaignId}`, {
           method: 'PATCH',
