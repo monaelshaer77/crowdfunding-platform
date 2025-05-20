@@ -1,300 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crowdfunding Platform - Backer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .hidden { display: none; }
-        .campaign-card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
-        .project-image {
-  width: 100%;
-  height: 12rem; /* 192px */
-  object-fit: cover;
-}
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Backer - Crowdfunding Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .hidden { display: none; }
+    .campaign-card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+    .campaign-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
+  </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h1>Crowdfunding Platform - Backer</h1>
+  <div class="container mt-4">
+    <h1 class="mb-4">Crowdfunding Platform - Backer</h1>
 
-        <!-- Navigation -->
-        <ul class="nav nav-tabs mb-4">
-            <!-- <li class="nav-item">
-                <a class="nav-link active" href="#" data-section="register">Register/Login</a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-section="campaigns">Browse Campaigns</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-section="pledges">Pledge History</a>
-            </li>
-        </ul>
+    <!-- Tabs التنقل -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" data-section="campaigns">Browse Campaigns</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" data-section="pledges">Pledge History</a>
+      </li>
+    </ul>
 
-        <!-- Register/Login Section -->
-        <!-- <div id="register" class="section">
-            <h2>Register/Login</h2>
-            <form id="userForm">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary" id="userSubmitBtn">Submit</button>
-            </form>
-        </div> -->
+    <!-- قسم عرض الحملات -->
+    <div id="campaigns" class="section">
+      <div class="mb-3">
+        <label for="categoryFilter" class="form-label">Filter by Category:</label>
+        <select id="categoryFilter" class="form-select" style="max-width: 300px;">
+          <option value="">All</option>
+          <option value="Education">Education</option>
+          <option value="Health">Health</option>
+          <option value="Tech">Tech</option>
+          <option value="Arts">Arts</option>
+        </select>
+      </div>
 
-        <!-- Browse Campaigns Section -->
-        <div id="campaigns" class="section hidden">
-            <h2>Browse Campaigns</h2>
-            <div class="mb-3">
-                <label for="categoryFilter" class="form-label">Filter by Category</label>
-                <select id="categoryFilter" class="form-select">
-                    <option value="">All</option>
-                     <option value="Health & Medical">Health & Medical</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Education">Education</option>
-                    <option value="Disability">Disability</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Art & Culture">Art & Culture</option>
-                    <option value="Local Community">Local Community</option>
-                    <option value="International Aid">International Aid</option>
-                </select>
-            </div>
-            <div id="campaignList" class="row"></div>
-        </div>
-
-        <!-- Pledge Form Modal -->
-        <div class="modal fade" id="pledgeModal" tabindex="-1" aria-labelledby="pledgeModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="pledgeModalLabel">Pledge to Campaign</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="pledgeForm">
-                            <input type="hidden" id="pledgeCampaignId">
-                            <input type="hidden" id="pledgeUserId" value="1"> <!-- Assume logged-in user ID -->
-                            <div class="mb-3">
-                                <label for="pledgeAmount" class="form-label">Amount ($)</label>
-                                <input type="number" class="form-control" id="pledgeAmount" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pledgeReward" class="form-label">Select Reward</label>
-                                <select id="pledgeReward" class="form-select" required>
-                                    <option value="">Select a reward</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="pledgeSubmitBtn">Pledge</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pledge History Section -->
-        <div id="pledges" class="section hidden">
-            <h2>Pledge History</h2>
-            <div id="pledgeList"></div>
-        </div>
+      <div class="row" id="campaignList">
+        <!-- تظهر هنا بطاقات الحملات -->
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const API_URL = 'http://localhost:3000';
-        let currentUserId = 1; // Simulate logged-in user (in real app, use auth)
+    <!-- قسم عرض تاريخ التبرعات -->
+    <div id="pledges" class="section hidden">
+      <h3>Your Pledge History</h3>
+      <div id="pledgeList" class="mt-3">
+        <!-- تظهر هنا تاريخ التبرعات -->
+      </div>
+    </div>
 
-        // Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.section');
+    <!-- Modal التبرع -->
+    <div class="modal fade" id="pledgeModal" tabindex="-1" aria-labelledby="pledgeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form id="pledgeForm" class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pledgeModalLabel">Make a Pledge</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="pledgeCampaignId" name="campaignId" />
+            <input type="hidden" id="pledgeUserId" name="userId" />
+            <div class="mb-3">
+              <label for="pledgeAmount" class="form-label">Amount ($):</label>
+              <input type="number" id="pledgeAmount" name="amount" class="form-control" min="1" required />
+            </div>
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
+            <div class="mb-3">
+              <label for="pledgeReward" class="form-label">Select a Reward (optional):</label>
+              <select id="pledgeReward" name="rewardId" class="form-select">
+                <option value="">No reward</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="pledgeSubmitBtn" class="btn btn-primary">Submit Pledge</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-                sections.forEach(section => section.classList.add('hidden'));
-                document.getElementById(link.dataset.section).classList.remove('hidden');
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API_URL = 'http://localhost:3000';
 
-                if (link.dataset.section === 'campaigns') {
-                    loadCampaigns();
-                } else if (link.dataset.section === 'pledges') {
-                    loadPledgeHistory();
-                }
+    const currentUserId = 'USER_ID_HERE'; 
+
+    const campaignList = document.getElementById('campaignList');
+    const pledgeList = document.getElementById('pledgeList');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCampaigns();
+    });
+
+    async function loadCampaigns() {
+      const category = categoryFilter.value;
+
+      try {
+        campaignList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
+        const url = category ? `${API_URL}/campaigns?category=${encodeURIComponent(category)}&_sort=deadline` : `${API_URL}/campaigns?_sort=deadline`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Failed to fetch campaigns');
+        const campaigns = await res.json();
+
+        campaignList.innerHTML = campaigns.length ? '' : '<div class="text-muted text-center">No campaigns found.</div>';
+
+        campaigns.forEach(c => {
+          if (!c.id) return;
+          const card = document.createElement('div');
+          card.className = 'col-lg-4 col-md-6 mb-4';
+          card.innerHTML = `
+            <div class="campaign-card">
+              <img src="${c.image}" alt="${c.title}" />
+              <h4>${c.title}</h4>
+              <p>${c.description}</p>
+              <p><strong>Category:</strong> ${c.category}</p>
+              <p><strong>Goal:</strong> $${c.goal}</p>
+              <p><strong>Raised:</strong> $${c.raised || 0}</p>
+              <p><strong>Deadline:</strong> ${new Date(c.deadline).toLocaleDateString()}</p>
+              <button class="btn btn-primary pledge-btn" data-id="${c.id}" data-bs-toggle="modal" data-bs-target="#pledgeModal">Pledge</button>
+            </div>`;
+          campaignList.appendChild(card);
+        });
+
+        document.querySelectorAll('.pledge-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const campaignId = btn.dataset.id;
+            document.getElementById('pledgeCampaignId').value = campaignId;
+            document.getElementById('pledgeUserId').value = currentUserId;
+
+            const res = await fetch(`${API_URL}/campaigns/${campaignId}`);
+            const campaign = await res.json();
+
+            const rewardSelect = document.getElementById('pledgeReward');
+            rewardSelect.innerHTML = '<option value="">No reward</option>';
+
+            campaign.rewards.forEach((reward, index) => {
+              const option = document.createElement('option');
+              option.value = index; 
+              option.text = reward.title;
+              rewardSelect.appendChild(option);
             });
+          });
         });
+      } catch (error) {
+        campaignList.innerHTML = '<div class="text-danger text-center">Failed to load campaigns</div>';
+      }
+    }
 
-        // Register/Login
-        document.getElementById('userForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = document.getElementById('userSubmitBtn');
-            submitBtn.disabled = true;
+    categoryFilter.addEventListener('change', () => {
+      loadCampaigns();
+    });
 
-            const user = {
-                username: document.getElementById('username').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value, // In real app, hash this
-                role: 'backer'
-            };
+    document.getElementById('pledgeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-            try {
-                const response = await fetch(`${API_URL}/users`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(user)
-                });
-                if (!response.ok) throw new Error('Failed to register');
-                const newUser = await response.json();
-                currentUserId = newUser.id;
-                document.getElementById('pledgeUserId').value = currentUserId;
-                alert('Registered successfully!');
-                document.getElementById('userForm').reset();
-            } catch (error) {
-                alert('Error registering');
-            } finally {
-                submitBtn.disabled = false;
-            }
-        });
+      const submitBtn = document.getElementById('pledgeSubmitBtn');
+      submitBtn.disabled = true;
 
-        // Load Campaigns
-        async function loadCampaigns() {
-            const campaignList = document.getElementById('campaignList');
-            const category = document.getElementById('categoryFilter').value;
+      const amount = parseFloat(document.getElementById('pledgeAmount').value);
+      const rewardIndex = document.getElementById('pledgeReward').value;
+      const campaignId = document.getElementById('pledgeCampaignId').value;
+      const userId = document.getElementById('pledgeUserId').value;
 
-            try {
-                campaignList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
-                const url = category
-                    ? `${API_URL}/campaigns?category=${category}&_sort=deadline`
-                    : `${API_URL}/campaigns?_sort=deadline`;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('Failed to fetch campaigns');
-                const campaigns = await res.json();
+      try {
+        const campaignRes = await fetch(`${API_URL}/campaigns/${campaignId}`);
+        const campaign = await campaignRes.json();
 
-                campaignList.innerHTML = campaigns.length
-                    ? ''
-                    : '<div class="text-muted text-center">No campaigns found.</div>';
-
-                campaigns.forEach(c => {
-                    const card = document.createElement('div');
-                    card.className = 'col-lg-4 col-md-6 mb-4';
-                    card.innerHTML = `
-                        <div class="campaign-card">
-                            <h4>${c.title}</h4>
-                            <p>${c.description}</p>
-                            <img src="${c.image}" alt="${c.title}" class="project-image">
-                            <p><strong>Category:</strong> ${c.category}</p>
-                            <p><strong>Goal:</strong> $${c.goal}</p>
-                            <p><strong>Raised:</strong> $${c.raised || 0}</p>
-                            <p><strong>Deadline:</strong> ${new Date(c.deadline).toLocaleDateString()}</p>
-                            <button class="btn btn-primary pledge-btn" data-id="${c.id}" data-bs-toggle="modal" data-bs-target="#pledgeModal">Pledge</button>
-                        </div>
-                    `;
-                    campaignList.appendChild(card);
-                });
-
-                document.querySelectorAll('.pledge-btn').forEach(btn => {
-                    btn.addEventListener('click', async () => {
-                        const campaignId = btn.dataset.id;
-                        document.getElementById('pledgeCampaignId').value = campaignId;
-
-                        // Load rewards for the campaign
-                        const res = await fetch(`${API_URL}/campaigns/${campaignId}`);
-                        const campaign = await res.json();
-                        const rewardSelect = document.getElementById('pledgeReward');
-                        rewardSelect.innerHTML = '<option value="">Select a reward</option>';
-                        campaign.rewards.forEach(r => {
-                            const option = document.createElement('option');
-                            option.value = r.id;
-                            option.text = `${r.title} (Min: $${r.minAmount})`;
-                            rewardSelect.appendChild(option);
-                        });
-                    });
-                });
-            } catch (error) {
-                campaignList.innerHTML = '<div class="text-danger text-center">Failed to load campaigns</div>';
-            }
+        let rewardId = null;
+        if (rewardIndex !== "") {
+          const reward = campaign.rewards[rewardIndex];
+          rewardId = reward ? (reward.id || null) : null;
         }
 
-        // Category Filter
-        document.getElementById('categoryFilter').addEventListener('change', loadCampaigns);
+        const pledge = {
+          id: Date.now().toString(),
+          campaignId,
+          userId,
+          amount,
+          rewardId,
+          createdAt: new Date().toISOString()
+        };
 
-        // Submit Pledge
-        document.getElementById('pledgeForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = document.getElementById('pledgeSubmitBtn');
-            submitBtn.disabled = true;
-
-            const pledge = {
-                amount: parseFloat(document.getElementById('pledgeAmount').value),
-                rewardId: document.getElementById('pledgeReward').value,
-                campaignId: parseInt(document.getElementById('pledgeCampaignId').value),
-                userId: parseInt(document.getElementById('pledgeUserId').value),
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                const response = await fetch(`${API_URL}/pledges`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(pledge)
-                });
-                if (!response.ok) throw new Error('Failed to submit pledge');
-                alert('Pledge submitted!');
-                document.getElementById('pledgeForm').reset();
-                bootstrap.Modal.getInstance(document.getElementById('pledgeModal')).hide();
-            } catch (error) {
-                alert('Error submitting pledge');
-            } finally {
-                submitBtn.disabled = false;
-            }
+        const pledgeResponse = await fetch(`${API_URL}/pledges`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(pledge)
         });
 
-        // Load Pledge History
-        async function loadPledgeHistory() {
-            const pledgeList = document.getElementById('pledgeList');
+        // if (!pledgeResponse.ok) throw new Error('Failed to submit pledge');
 
-            try {
-                pledgeList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
-                const res = await fetch(`${API_URL}/pledges?userId=${currentUserId}`);
-                if (!res.ok) throw new Error('Failed to fetch pledges');
-                const pledges = await res.json();
+        const updatedRaised = (campaign.raised || 0) + amount;
+        await fetch(`${API_URL}/campaigns/${campaignId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ raised: updatedRaised })
+        });
 
-                pledgeList.innerHTML = pledges.length
-                    ? ''
-                    : '<div class="text-muted text-center">No pledges found.</div>';
+        alert('Pledge submitted!');
+        e.target.reset();
+        bootstrap.Modal.getInstance(document.getElementById('pledgeModal')).hide();
 
-                pledges.forEach(async p => {
-                    // Fetch campaign title for display
-                    const campaignRes = await fetch(`${API_URL}/campaigns/${p.campaignId}`);
-                    const campaign = await campaignRes.json();
+        loadCampaigns();
+      } catch (error) {
+        console.error(error);
+        // alert('Error submitting pledge');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
 
-                    const item = document.createElement('div');
-                    item.className = 'card mb-2';
-                    item.innerHTML = `
-                        <div class="card-body">
-                            <h5 class="card-title">Campaign: ${campaign.title}</h5>
-                            <p class="card-text">Amount: $${p.amount}</p>
-                            <p class="card-text">Reward ID: ${p.rewardId}</p>
-                            <p class="card-text">Date: ${new Date(p.createdAt).toLocaleDateString()}</p>
-                        </div>
-                    `;
-                    pledgeList.appendChild(item);
-                });
-            } catch (error) {
-                pledgeList.innerHTML = '<div class="text-danger text-center">Failed to load pledges</div>';
-            }
-        }
-    </script>
+    async function loadPledgeHistory() {
+      try {
+        pledgeList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
+        const res = await fetch(`${API_URL}/pledges?userId=${currentUserId}`);
+        if (!res.ok) throw new Error('Failed to fetch pledges');
+        const pledges = await res.json();
+
+        pledgeList.innerHTML = pledges.length ? '' : '<div class="text-muted text-center">No pledges found.</div>';
+
+        const campaignsRes = await fetch(`${API_URL}/campaigns`);
+        const campaigns = await campaignsRes.json();
+        const campaignMap = campaigns.reduce((map, c) => { map[c.id] = c.title; return map; }, {});
+
+        pledges.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'card mb-2';
+          item.innerHTML = `
+            <div class="card-body">
+              <h5 class="card-title">Campaign: ${campaignMap[p.campaignId] || 'Unknown'}</h5>
+              <p class="card-text">Amount: $${p.amount}</p>
+              <p class="card-text">Reward ID: ${p.rewardId || 'None'}</p>
+              <p class="card-text">Date: ${new Date(p.createdAt).toLocaleDateString()}</p>
+            </div>`;
+          pledgeList.appendChild(item);
+        });
+      } catch (error) {
+        pledgeList.innerHTML = '<div class="text-danger text-center">Failed to load pledges</div>';
+      }
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        showSection(link.dataset.section);
+
+        if (link.dataset.section === 'campaigns') loadCampaigns();
+        else if (link.dataset.section === 'pledges') loadPledgeHistory();
+      });
+    });
+
+    function showSection(sectionId) {
+      sections.forEach(sec => {
+        sec.classList.toggle('hidden', sec.id !== sectionId);
+      });
+    }
+  </script>
 </body>
 </html>
