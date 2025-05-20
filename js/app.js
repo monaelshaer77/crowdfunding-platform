@@ -58,6 +58,17 @@ function InitializeCampaign() {
 function viewCampaign(id) {
   window.location.href = `../pages/viewcapmain.html?id=${id}`;
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const currentPath = window.location.pathname;
 
-// استدعاء الدالة عند تحميل الصفحة
+  navLinks.forEach(link => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    }
+  });
+});
+
 InitializeCampaign();
