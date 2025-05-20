@@ -142,6 +142,43 @@ a{
     color: var(--accent-color); 
 
 }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  position: relative;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: var(--accent-color);
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
 .donate-btn {
   background-color: var(--highlight-bg); /* SCSS $highlight-bg */
   border: 1px solid rgba(0, 0, 0, 0.15);
