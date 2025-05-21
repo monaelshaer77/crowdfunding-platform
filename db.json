@@ -9,11 +9,34 @@
       "role": "admin",
       "isApproved": true,
       "isActive": true
+    },
+    {
+      "id": "e25a",
+      "name": "Mona Ayman Elshaer",
+      "email": "monaelshaer6@gmail.com",
+      "password": "123456",
+      "phone": "01119368845",
+      "role": "campaigner",
+      "approved": false,
+      "isApproved": true,
+      "isActive": true
+    },
+    {
+      "id": "8a92",
+      "name": "monaelshaer99",
+      "email": "monaelsha6@gmail.com",
+      "password": "22222222",
+      "phone": "01119368845",
+      "role": "campaigner",
+      "approved": false,
+      "isApproved": true,
+      "isActive": true
     }
   ],
   "campaigns": [
+    
+  
   ],
-  "pledges": [
-  ],
+  "pledges": [],
   "updates": []
 }
