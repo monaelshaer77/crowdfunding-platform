@@ -9,11 +9,39 @@
       "role": "admin",
       "isApproved": true,
       "isActive": true
+    },
+    {
+      "id": "b853",
+      "name": "Ahmed Khaled Ahmed Elads",
+      "email": "ahmedelads@gmail.com",
+      "password": "111111111111",
+      "phone": "01113152645",
+      "role": "backer",
+      "approved": false,
+      "isActive": true
+    },
+    {
+      "id": "ebc9",
+      "name": "Ahmed Khaled",
+      "email": "ahmedelads66@gmail.com",
+      "password": "123456789",
+      "phone": "01142107502",
+      "role": "campaigner",
+      "approved": false,
+      "isApproved": true
+    },
+    {
+      "id": "79f9",
+      "name": "Ahmed Khaled",
+      "email": "ahmedelads7894@gmail.com",
+      "password": "11111111",
+      "phone": "01142107502",
+      "role": "campaigner",
+      "approved": false,
+      "isApproved": true
     }
   ],
-  "campaigns": [
-  ],
-  "pledges": [
-  ],
+  "campaigns": [],
+  "pledges": [],
   "updates": []
 }
