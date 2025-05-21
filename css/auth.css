@@ -151,3 +151,70 @@ body {
 .is-valid {
     border: 2px solid green !important;
 }
+@media (max-width: 576px) {
+    .login-container,
+    .signup-container {
+        flex-direction: column; /* Stack vertically */
+        padding: 1.5rem; /* Reduce padding */
+        width: 95vw; /* Nearly full width */
+        margin: 1rem auto;
+    }
+
+    .form-right-login,
+    .form-left-login,
+    .form-left-sign,
+    .form-right-sign {
+        padding: 1.5rem; /* Reduce padding */
+        min-width: 100%; /* Full width */
+    }
+
+    .submit-btn {
+        width: 100%; /* Full width button */
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .social-container a {
+        height: 2rem;
+        width: 2rem;
+        font-size: 1rem;
+        margin: 0 0.25rem;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .success-message {
+        font-size: 0.8rem;
+    }
+}@media (min-width: 577px) and (max-width: 768px) {
+    .login-container,
+    .signup-container {
+        width: 90vw;
+        padding: 2rem;
+    }
+
+    .form-right-login,
+    .form-left-login,
+    .form-left-sign,
+    .form-right-sign {
+        padding: 2rem;
+        min-width: 45%; /* Slightly wider */
+    }
+
+    .submit-btn {
+        width: 8rem;
+        font-size: 0.9rem;
+    }
+
+    .social-container a {
+        height: 2.2rem;
+        width: 2.2rem;
+        font-size: 1.1rem;
+    }
+
+    .form-label {
+        font-size: 0.95rem;
+    }
+}
