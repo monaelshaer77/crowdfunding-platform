@@ -7,8 +7,8 @@ function localContent(elementId, fileName) {
         .catch(err => console.log('Error loading content'));
 }
 
-localContent("header-container",'../components/header.html');
-localContent("footer-container","../components/footer.html");
+localContent("header-container", '../components/header.html');
+localContent("footer-container", "../components/footer.html");
 
 class AuthFormHandler {
     constructor() {
@@ -93,11 +93,12 @@ class AuthFormHandler {
 
             if (user) {
                 if (user.role === "campaigner" && !user.isApproved) {
-  alert("Your campaigner account has not been approved yet. Please wait for the admin to approve your request.");
-  return;
-} if (!user.isActive ) {
-  alert("user banded.");
-  return;}
+                    alert("Your campaigner account has not been approved yet. Please wait for the admin to approve your request.");
+                    return;
+                } if (!user.isActive) {
+                    alert("user banded.");
+                    return;
+                }
 
 
                 loginSuccess.style.display = "block";
@@ -105,8 +106,8 @@ class AuthFormHandler {
                     if (user.role === "admin") {
                         window.open("../pages/dechboardAdmin.html", "_blank");
                     } else if (user.role === "campaigner" && user.isApproved) {
-                         window.open("../pages/campaigner-dashboard.html", "_blank");
-                    }  else if (user.role === "backer" )  {
+                        window.open("../pages/campaigner-dashboard.html", "_blank");
+                    } else if (user.role === "backer") {
                         window.open("../pages/Backer.html", "_blank");
                     }
                 }, 1500);
@@ -183,7 +184,15 @@ class AuthFormHandler {
                 return;
             }
 
-            const success = await this.registerUser({ name, email, password, phone, role, approved: role === "admin" });
+            const success = await this.registerUser({
+                name,
+                email,
+                password,
+                phone,
+                role,
+                isApproved: role === "admin",
+                isActive: true
+            });
             if (success) {
                 successMessage.style.display = 'block';
                 setTimeout(() => successMessage.style.display = "none", 3000);
