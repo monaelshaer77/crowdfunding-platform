@@ -93,13 +93,14 @@ class AuthFormHandler {
 
             if (user) {
                 if (user.role === "campaigner" && !user.isApproved) {
-                    alert("Your campaigner account has not been approved yet. Please wait for the admin to approve your request.");
-                    return;
-                } if (!user.isActive) {
-                    alert("user banded.");
-                    return;
-                }
-
+  alert("Your campaigner account has not been approved yet. Please wait for the admin to approve your request.");
+  return;
+}
+if(!user.isActive)
+{
+   alert("user Banned.");
+     return; 
+}
 
                 loginSuccess.style.display = "block";
                 setTimeout(() => {
