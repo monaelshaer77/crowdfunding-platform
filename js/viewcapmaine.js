@@ -43,6 +43,12 @@ function loadCampaign() {
       deadlineElement.textContent = `Deadline: ${campaign.deadline}`;
       campaignImage.src=`${campaign.image}`;
 
+      const progressBar = document.querySelector(".progress-bar");
+    const raised = Number(campaign.raised);
+    const goal = Number(campaign.goal);
+    const percent = goal === 0 ? 0 : Math.min((raised / goal) * 100, 100);
+    progressBar.style.width = `${percent}%`;
+    progressBar.setAttribute("aria-valuenow", percent.toFixed(1));
     //   if (campaign.rewards && campaign.rewards.length > 0) {
     //     rewardsElement.innerHTML = "<h3>Rewards:</h3>";
     //     campaign.rewards.forEach(reward => {
