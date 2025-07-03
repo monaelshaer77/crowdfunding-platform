@@ -4,6 +4,7 @@ const imagePreview = document.getElementById("imagePreview");
 const campaignList = document.getElementById("campaignList");
 const submitBtn = document.getElementById("submitBtn");
 
+const currentUserId = "admin123"; // Current user
 let base64Image = "";
 
 const navLinks = document.querySelectorAll(".nav-link");
@@ -51,7 +52,7 @@ form.addEventListener("submit", async (e) => {
     const rewardDescription = document.getElementById("rewardDescription").value;
 
     if (!base64Image || !title || !description || !deadline || !goal || !rewardTitle || !rewardDescription || !category) {
-        alert("Please fill all fields and upload an image.");
+        Swal.fire("Missing Information", "Please fill all fields and upload an image.", "warning");
         submitBtn.disabled = false;
         return;
     }
@@ -65,7 +66,8 @@ form.addEventListener("submit", async (e) => {
         goal,
         rewards: [{ title: rewardTitle, description: rewardDescription }],
         raised: 0,
-        isApproved: false
+        isApproved: false,
+        creatorId: currentUserId
     };
 
     try {
@@ -76,16 +78,19 @@ form.addEventListener("submit", async (e) => {
         });
 
         if (!response.ok) throw new Error("Failed to create campaign");
+
         form.reset();
         base64Image = "";
         imagePreview.src = "";
         imagePreview.style.display = "none";
-        alert("Campaign created!");
+
+        Swal.fire("Success", "Campaign created successfully!", "success");
+
         if (!document.getElementById("campaigns-list").classList.contains("hidden")) {
             await loadCampaigns();
         }
     } catch (error) {
-        alert("Error creating campaign");
+        Swal.fire("Error", "Failed to create campaign.", "error");
     } finally {
         submitBtn.disabled = false;
     }
@@ -96,11 +101,16 @@ async function loadCampaigns() {
         campaignList.innerHTML = '<div class="text-muted text-center">Loading...</div>';
         const res = await fetch("http://localhost:3000/campaigns");
         if (!res.ok) throw new Error("Failed to fetch campaigns");
+
         const campaigns = await res.json();
 
-        campaignList.innerHTML = campaigns.length ? "" : '<div class="text-muted text-center">No campaigns found.</div>';
+        const userCampaigns = campaigns.filter(c => c.creatorId === currentUserId);
 
-        campaigns.forEach(c => {
+        campaignList.innerHTML = userCampaigns.length
+            ? ""
+            : '<div class="text-muted text-center">No campaigns found.</div>';
+
+        userCampaigns.forEach(c => {
             const card = document.createElement("div");
             card.className = "col-lg-4 col-md-6 mb-4";
             card.innerHTML = `
@@ -141,14 +151,21 @@ async function loadCampaigns() {
 }
 
 function editCampaign(id) {
-    // For simplicity, assume editing happens inline or redirect to edit page
-    alert(`Edit campaign ${id} - Implement edit form or redirect to edit-campaign.html`);
-    // Example: Redirect to edit page
+    Swal.fire("Redirecting", `Edit campaign ${id}`, "info");
     window.location.href = `edit-campaign.html?id=${id}`;
 }
 
 async function deleteCampaign(id, button) {
-    if (!confirm("Are you sure you want to delete this campaign?")) return;
+    const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel"
+    });
+
+    if (!result.isConfirmed) return;
 
     button.disabled = true;
     try {
@@ -158,15 +175,14 @@ async function deleteCampaign(id, button) {
         });
         if (!response.ok) throw new Error("Failed to delete campaign");
         await loadCampaigns();
-        alert("Campaign deleted!");
+        Swal.fire("Deleted!", "Your campaign has been deleted.", "success");
     } catch (error) {
-        alert("Error deleting campaign");
+        Swal.fire("Error", "Failed to delete campaign.", "error");
     } finally {
         button.disabled = false;
     }
 }
 
-// New function for PATCH campaign updates
 async function updateCampaign(id, updatedData) {
     try {
         const response = await fetch(`http://localhost:3000/campaigns/${id}`, {
@@ -175,30 +191,40 @@ async function updateCampaign(id, updatedData) {
             body: JSON.stringify(updatedData)
         });
         if (!response.ok) throw new Error("Failed to update campaign");
-        alert("Campaign updated!");
+
+        Swal.fire("Updated!", "Campaign updated successfully.", "success");
         await loadCampaigns();
     } catch (error) {
-        alert("Error updating campaign");
+        Swal.fire("Error", "Failed to update campaign.", "error");
     }
 }
 
-// New function for GET pledges
 async function loadPledges(campaignId) {
     try {
         const res = await fetch(`http://localhost:3000/pledges?campaignId=${campaignId}`);
         if (!res.ok) throw new Error("Failed to fetch pledges");
         const pledges = await res.json();
-        // Simple display for demo; replace with proper UI
-        const pledgeList = pledges.map(p => `Amount: $${p.amount}, User ID: ${p.userId}`).join("\n");
-        alert(`Pledges for Campaign ${campaignId}:\n${pledgeList || "No pledges found"}`);
+        const pledgeList = pledges.map(p => `💵 $${p.amount} by ${p.userId}`).join("<br>") || "No pledges yet.";
+
+        Swal.fire({
+            title: `Pledges for Campaign`,
+            html: pledgeList,
+            icon: "info",
+        });
     } catch (error) {
-        alert("Error loading pledges");
+        Swal.fire("Error", "Failed to load pledges.", "error");
     }
 }
 
-// New function for POST updates
 async function postUpdatePrompt(campaignId) {
-    const content = prompt("Enter update content:");
+    const { value: content } = await Swal.fire({
+        title: "Post an Update",
+        input: "textarea",
+        inputLabel: "Your update message",
+        inputPlaceholder: "Type your update here...",
+        showCancelButton: true,
+    });
+
     if (!content) return;
 
     const update = { campaignId, content, createdAt: new Date() };
@@ -209,12 +235,10 @@ async function postUpdatePrompt(campaignId) {
             body: JSON.stringify(update)
         });
         if (!response.ok) throw new Error("Failed to post update");
-        alert("Update posted!");
+        Swal.fire("Success", "Update posted successfully!", "success");
     } catch (error) {
-        alert("Error posting update");
+        Swal.fire("Error", "Failed to post update.", "error");
     }
 }
 
-document.querySelector('.nav-link[data-section="campaigns-list"]').addEventListener("click", () => {
-    loadCampaigns();
-});
+document.querySelector('.nav-link[data-section="campaigns-list"]')?.addEventListener("click", loadCampaigns);

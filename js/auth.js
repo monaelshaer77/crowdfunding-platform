@@ -101,6 +101,7 @@ if(!user.isActive)
    alert("user Banned.");
      return; 
 }
+localStorage.setItem("currentUser", JSON.stringify(user));
 
                 loginSuccess.style.display = "block";
                 setTimeout(() => {
